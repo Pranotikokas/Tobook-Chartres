@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+
+{% block navbar %}{% include ('UserBundle:navbar:navbar.html.twig') %}{% endblock %}
+
+{% block body %}
+	<article id="main">
+        <header id="fildarian">
+            <span style="font-size: 1.1em;">
+               <a href="#" style="padding: 0 2em;" class="colorvert ariane">&#60; Retour</a>
+            </span>
+            <span class="ariane"><!-- Génération d'un fil d'Ariane dynamique -->
+            	<a href="#">Accueil</a> > <a href="/login.php">Login</a></span>
+        </header> 
+    </article>
+
+
+    <div class="content contact">
+
+        <img style="width:15%;" class="imagecontact" src="{{ asset('img/logo-tobook.png') }}" alt="Logo Tobook" title="Besoin d'une information ?" />
+
+
+
+        <h2 class="major after">Je m'inscris</h2>
+
+        <div class="formulaire_contact">
+        	{% trans_default_domain 'FOSUserBundle' %}
+        	{{ form_start(form, {'method': 'post', 'action': path('user_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+        		<font  >Nom </font>
+        		<input class='btn02' type='text' name='nom' value=''>
+
+        		<font  >Prénom</font>
+        		{{ form_widget(form.username) }}
+				{{ form_errors(form.username) }}
+
+        		<font  >Adresse mail </font>
+        		{{ form_widget(form.email) }}
+				{{ form_errors(form.email) }}
+
+        		<font  >Mot de passe </font>
+        		{{ form_widget(form.plainPassword.first) }}
+				{{ form_errors(form.plainPassword.first) }}
+
+        		<font  >Confirmation de Mot de passe </font>
+				{{ form_widget(form.plainPassword.second) }}
+				{{ form_errors(form.plainPassword.second) }}
+
+        		<br>
+        		<input class='btn01' type='reset' value='Cancel'>
+        		<input class='btn01' type='submit' value="{{ 'registration.submit'|trans }}">
+        	{{ form_end(form) }}
+        </div>
+    </div>
+{% block register %}
+
+
+
+
+<!-- EXEMPLE DE FORMULAIRE 
+<div class="col-md-6 col-md-offset-3 register-div">
+	{{ form_start(form, {'method': 'post', 'action': path('user_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+		<div class="col-md-12 register-title">
+			<h1>Enregistrement</h1>
+		</br>
+		</br>
+		</div>
+		<div class="col-md-12 ">
+			<div class="col-md-6">
+		    	Nom d'utilisateur :
+		    </div>
+			<div class="col-md-6">
+				{{ form_widget(form.username) }}
+				{{ form_errors(form.username) }}
+		    </div>
+		</div>
+
+		<div class="col-md-12 register-form">
+			<div class="col-md-6">
+		    	Adresse E-mail :
+		    </div>
+			<div class="col-md-6">
+				{{ form_widget(form.email) }}
+				{{ form_errors(form.email) }}
+		    </div>
+		</div>
+
+		<div class="col-md-12 ecart">
+		    <div class="col-md-6 a">
+		        <p class="appel">Age :</p>
+		    </div>
+		    <div class="col-md-6">
+		        <input class="age-field" type="number" name="age">
+		    </div>
+		</div>
+
+		<div class="col-md-12 register-form">
+			<div class="col-md-6">
+		    	Mot de passe :
+		    </div>
+			<div class="col-md-6">
+				{{ form_widget(form.plainPassword.first) }}
+				{{ form_errors(form.plainPassword.first) }}
+		    </div>
+		</div>
+
+		<div class="col-md-12 register-form">
+			<div class="col-md-6">
+		    	Confirmation mot de passe :
+		    </div>
+			<div class="col-md-6">
+				{{ form_widget(form.plainPassword.second) }}
+				{{ form_errors(form.plainPassword.second) }}
+		    </div>
+		</div>
+
+	    <div class="col-md-12 register-but">
+	    	<div class="col-md-6 col-md-offset-6">
+	        	<input class="btn btn-register" type="submit" text-align right value="{{ 'registration.submit'|trans }}" />
+	    	</div>
+	    </div>
+	{{ form_end(form) }}
+</div>
+-->
+{% endblock %}
+{% endblock %}
+{% block stylesheets %}
+	 <style type="text/css">
+            /*
+            body {
+            color: purple;
+            background-color: #f5f5f5 ;
+
+            }
+
+            article {
+            color: #000000;
+            background-color: #000000 ;
+            margin-left: auto;
+            margin-right: auto;
+            height : 600px ; 
+            width : 900px 
+            }
+            article a:link,  article a:visited,  article a:active,  article a:hover {
+            color: #000000;
+            width: 100%;
+            }
+
+            .layout { font-family: Georgia, serif; }
+            .layout-slider {margin-top: 15px; margin-bottom: 10px; width: 50%; }
+            .layout-slider-settings { font-size: 12px; }
+            .layout-slider-settings pre { font-family: Courier; }
+            .tagh { text-align: left; vertical-align:middle ; }
+            */
+        </style>
+    {% endblock %}

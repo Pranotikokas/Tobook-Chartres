@@ -1,0 +1,45 @@
+<header id="header">
+    <h1><a href="index.php">Tobook<span>.club</span></a></h1>
+    <span style="margin-left: 20%; float:left; font-size:10px; font-weight:bold; padding-top: 5px;">
+        <span class="langdevise">Langue &nbsp;</span>
+        <span id="langue">FR</span>
+        <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
+        <span class="langdevise">Devise &nbsp;</span>
+        <span id="devise">EUR</span>
+    </span>
+    <a href="https://www.facebook.com/Roomservyou-454428541427992/?fref=nf" target="_blank">
+        <img src="{{ asset('img/icon-facebook.png') }}" alt="Logo Facebook" title="Suivez-nous sur Facebook" class="vertialimid" />
+    </a>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <span>Bienvenue {{ app.user.username }}</span>
+    {% else %}
+        <a href="{{ path('user_register') }}" class="btn btnsansrien"><span>S'INSCRIRE</span></a>
+        <a href=""><span>SE CONNECTER</span></a>
+    {% endif %}           
+    <a href="#menu"><span>Menu</span></a>
+</header>
+     <!-- Menu -->
+<nav id="menu">
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <ul class="links">
+            <li><a href="#">Nouvelle Recherche</a></li>
+            <li><a href='#'>Ma page</a></li>
+            <li><a href='#'>Mes Favoris</a></li>
+            <li><a href='#'>Mes paramètres</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="{{ path('fos_user_security_logout') }}" class="btn btnsansrien button fit"><span>SE DECONNECTER</span></a></li>
+        </ul>
+    {% else %}
+        <ul class="links">
+            <li><a href="#">Nouvelle Recherche</a></li>
+            <li><a href='#'>Ma page</a></li>
+            <li><a href='#'>Mes Favoris</a></li>
+            <li><a href='#'>Mes paramètres</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
+            <li><a href="#" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
+        </ul>
+    {% endif %}
+</nav>
