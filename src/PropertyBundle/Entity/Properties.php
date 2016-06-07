@@ -100,16 +100,16 @@ class Properties
     private $description;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="latitude", type="string", length=255)
+     * @ORM\Column(name="latitude", type="float")
      */
     private $latitude;
 
     /**
-     * @var string
+     * @var float
      *
-     * @ORM\Column(name="longitude", type="string", length=255)
+     * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
 
