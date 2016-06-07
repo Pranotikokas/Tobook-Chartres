@@ -1,14 +1,18 @@
 property:
     resource: "@PropertyBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   property/
 
 rating:
     resource: "@RatingBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   rating/
 
 comment:
     resource: "@CommentBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   comment/
+
+home:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index}
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
