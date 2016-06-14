@@ -2,11 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}Tobook{% endblock %}</title>
+        {% block stylesheets %}
+        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/auto_style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/jslider.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.blue.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.plastic.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.round.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.round.plastic.css') }}" type="text/css">
+        <!-- Scripts -->
+        <meta name="ToBook" content="ToBook">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript" src="{{ asset('javascripts/auto_jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('javascripts/auto_script.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.leanModal.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
+        <script src="{{ asset('js/skel.min.js') }}"></script>
+        <script src="{{ asset('js/util.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <!-- Intégration Web WCS Page recherche.php -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <link rel="icon" type="image/png" href="{{ asset('img/logo-tobook.png') }}" />
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
     </head>
     <body>
+        {% block navbar %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
