@@ -13,7 +13,7 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <span>Bienvenue {{ app.user.username }}</span>
     {% else %}
-        <a href="{{ path('user_register') }}" class="btn btnsansrien"><span>S'INSCRIRE</span></a>
+        <a href="{{ path('fos_user_registration_register') }}" class="btn btnsansrien"><span>S'INSCRIRE</span></a>
         <a href=""><span>SE CONNECTER</span></a>
     {% endif %}           
     <a href="#menu"><span>Menu</span></a>
@@ -38,7 +38,7 @@
             <li><a href='#'>Mes paramètres</a></li>
         </ul>
         <ul class="actions vertical">
-            <li><a href="{{ path ('user_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
+            <li><a href="{{ path ('fos_user_registration_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
             <li><a href="#" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
         </ul>
     {% endif %}
