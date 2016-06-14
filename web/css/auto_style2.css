@@ -1,0 +1,31 @@
+
+
+
+.label_div {
+	width: 190px;
+
+}
+
+.input_container input {
+/*	height: 20px;
+	width: 190px;
+*/	
+	border: 1px solid #cccccc;
+	border-radius: 0;
+}
+.input_container ul {
+	width: 206px;
+	border: 1px solid #eaeaea;
+	position: absolute;
+	background: #f3f3f3;
+	list-style: none;
+}
+
+.input_container ul li:hover {
+	background: #eaeaea;
+}
+#country_list_id {
+	display: none;
+}
+
+
