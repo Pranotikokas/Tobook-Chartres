@@ -1,12 +1,267 @@
 {% extends 'base.html.twig' %}
-{% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
-{% block body %}
-
-{% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
-{% endblock %}
-
-{% block javascripts %}
-{% endblock %}
-
+{% block title %}Recherche{% endblock %}
 {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/auto_style.css') }}" />
+            <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+            <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/jslider.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.blue.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.plastic.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.round.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('css/jslider.round.plastic.css') }}" type="text/css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+		<link rel="stylesheet" href="css/auto_style2.css" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF ;
+			}
+			nav {
+				color: FFFFFF;
+				background-color: #0ECB56 ;
+			}
+			#tbl-list-titre {
+				color: FFFFFF;
+				background-color: #0ECB56 ;
+
+			}
+			#band-droite {
+				color: #000000;
+				background-color: #FFFFFF ;
+
+			}
+			#band-gauche {
+				color: #000000;
+				background-color: #FFFFFF ;
+
+			}
+			#band-milieu {
+				color: #000000;
+				background-color: #FFFFFF ;
+
+			}
+			#main {
+				color: #000000;
+				background-color: #FFFFFF ;
+			}
+			article {
+				color: #000000;
+				background-color: #FFFFFF ;
+			}
+			article a:link,  article a:visited,  article a:active,  article a:hover {
+				color: #000000;
+			}
+			footer {
+				color: #FFFFFF;
+				background-color: #0ECB56 ;
+			}
+			footer a:link,  footer a:visited,  footer a:active,  footer a:hover {
+				color: #FFFFFF;
+			}
+			.centrer
+			{
+				display:block;
+				width:auto;
+				margin-left:auto;
+				margin-right:auto;
+			}
+			#map { 
+				height: 570px; 
+				width : 100%;
+				margin: 0; 
+				/*padding: 0; */ 
+			}
+			#zone-gris {
+				background-color: #E6E6E6 ;
+				border:1px solid #A4A4A4 ;
+				margin: 10px 0px 0px 0px ; /* H D B G */
+				padding : 8px 3px 8px 3px ; /* H D B G */
+				border-radius: 10px;
+			}
+			#zone-annonce-ex {
+				height: 250px ; 
+				background-color: #E6E6E6 ;
+				border:1px solid #A4A4A4 ;
+				margin: 10px 0px 0px 0px ; /* H D B G */
+				padding : 8px 3px 8px 3px ; /* H D B G */
+				border-radius: 10px;
+			}
+			#zone-annonce-in {
+				height: 200px ; 
+				background-color: #F7F8E0 ;
+				border:1px solid #393B0B ;
+				margin: 10px 0px 0px 0px ; /* H D B G */
+				padding : 8px 3px 8px 3px ; /* H D B G */
+				border-radius: 10px;
+			}
+			#zone-contenu-droite {
+				background-color: #E6F8E0 ;
+				border:1px solid #298A08 ;
+				margin: 0px 0px 5px 0px ; /* H D B G */
+				padding : 5px 3px 5px 3px ; /* H D B G */
+				border-radius: 10px;
+				width : 515px ;
+				min-height : 90px ;
+			}
+			SELECT.recherche {
+				width: 190px;
+			}
+			INPUT.recherche {
+				width: 190px;
+			}
+			INPUT.rrecherche {
+				width: 192px;
+			}
+
+		</style> 
 {% endblock %}
+
+{% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
+
+{% block body %}
+	<!-- Main -->
+	<article id="map2">
+		<header>
+			<!-- Form Recherche -->
+			<form class="topcherche" method="POST" action="recherches.php">
+				<div class="row uniform">
+					<div class="12u$">
+						<ul class="actions">
+							<li class="width50">
+								<input type="text" name="ville" id="query"  placeholder="Ville / Code postal" onkeyup="autocomplet()" autocomplete="on" value="Vendome" >
+								<ul id="country_list_id"></ul>
+							</li>
+							<li class="width30">
+								<div class="select-wrapper">
+									<select name="categorie" id="category">
+										<option value='3' >Chambres d&apos;hotes</option> <option value='2' >G&icirc;tes</option> <option value='1' selected>Hôtels</option> <option value='8' >Mus&eacute;es</option> <option value='5' >Restaurants</option> 									</select>
+								</div>
+							</li>
+							<li class="">
+								<input type="submit" value="Rechercher" class="special"/>                          	
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+
+			<!-- ville -->
+			<div class="loc">
+				<h2 class="major special resuldispnon">
+					<span><font color="FFFFFF">Résultats pour </font> <font color="FFFFFF"> Vendome</font></span>				</h2>
+			</div>
+		</header>
+		
+		<!-- Contenu textuel de la page -->
+		<article>
+			<div id="main">
+				<tr>
+					<td valign="top"><div id="band-milieu">
+						<!--- Affichage carte Google Maps --->
+
+												<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+						<script type="text/javascript">
+							var markers = [
+											{ 
+				'title': 'HOTEL CAPRICORNE', 
+				'lat': '47.80150600000000000000', 
+				'lng': '1.06801000000000000000', 
+				"description": "<div class='map-info' style='width:300px;min-height:40px;'>	<img src='assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg' alt='Photo de HOTEL CAPRICORNE'>	<div class='body'>		<a href=http://localhost/page_capricorne_club-house.html >HOTEL CAPRICORNE</a>		<div class='rates'><strong>9,5<span class='grade'>/10</span></strong>&nbsp;<span class='stars'><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star-O'></i></span></div>		<div class='rated-by'>Evalué par <strong>25</strong> personnes		<div class='price'>à partir de <strong>199 €</strong>	</div></div>"			}, 
+
+										];
+							window.onload = function () {
+								LoadMap();
+							};
+							function LoadMap() {
+								var mapOptions = {
+									center: {lat: 47.80130266920000000000, lng: 1.06106057175000000000},
+									zoom: 14,
+									mapTypeId: google.maps.MapTypeId.ROADMAP
+								};
+								var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+								//Create and open InfoWindow.
+								var infoWindow = new google.maps.InfoWindow();
+
+								for (var i = 0; i < markers.length; i++) {
+									var data = markers[i];
+									var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+									var marker = new google.maps.Marker({
+										position: myLatlng,
+										map: map,
+										title: data.title,
+										icon: 'assets/img/logo-icon.png'
+									});
+
+									//Attach click event to the marker.
+									(function (marker, data) {
+										google.maps.event.addListener(marker, "click", function (e) {
+											//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+											infoWindow.setContent(data.description);
+											infoWindow.open(map, marker);
+										});
+									})(marker, data);
+								}
+							}
+						</script>
+						<div id="map" >
+						</div>
+						<!--- FIN Carte --->
+
+
+						<!-- filtre resultats -->
+						<section class="resultats">
+							<div id="class">
+								<h1 class="classement">
+									<p id="classerpar">Classer par :</p>
+								</h1>
+								<form method="post" action="traitement.php" class="critere1">
+									<div class="4u$">
+										<div class="select-wrapper">
+											<select name="category" class="category">
+												<option value="">Prix</option>
+												<option value="">Les plus chers</option>
+												<option value="">Les plus économiques</option>
+											</select>
+										</div>
+									</div>
+								</form>
+								<form method="post" action="traitement.php" class="critere1">
+									<div class="4u$"></div>
+									<div class="select-wrapper">
+										<select name="category" class="category">
+											<option value="">Étoile</option>
+											<option value="">Par ordre croissant</option>
+											<option value="">Par ordre décroissant </option>
+										</select>
+									</div>
+								</form>                     
+								<form method="post" action="traitement.php" class="critere1">
+									<div class="select-wrapper">
+										<select name="category" class="category">
+											<option value="">Notes</option>
+											<option value="">Les plus appréciés par l'utilisateur</option>
+										</select>
+									</div>
+								</form>
+							</div>
+						</section>
+						<!-- Fin filtre resultats -->
+
+						<!-- articles resultats -->
+						<section id="two" class="wrapper alt">
+
+							<section class="spotlight"><div class="image"><a href="club-house.php?code=capricorne"><img src="assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg" alt="" /></a></div><div class="content"><h3 class="major"><a href="club-house.php?code=capricorne">HOTEL CAPRICORNE <img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'></a></h3><p class='descriptif_hotel'><p>L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose des chaines généralistes en...</p><div id="prix"><h2 id="elements"><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ></h2><p class="infoprix">à partir de: <span>62.00 €</span></p><a href="club-house.php?code=capricorne" class="button detail">Plus de détails</a> </div><p class="vue">Evalué par <span>25</span> personnes</p></div></section><section class="spotlight"><div class="image"><a href="club-house.php?code=levendome"><img src="assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg" alt="" /></a></div><div class="content"><h3 class="major"><a href="club-house.php?code=levendome">HÔTEL LE VENDÔME <img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'></a></h3><p class='descriptif_hotel'></p><div id="prix"><h2 id="elements"><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ></h2><p class="infoprix">à partir de: <span> €</span></p><a href="club-house.php?code=levendome" class="button detail">Plus de détails</a> </div><p class="vue">Evalué par <span>25</span> personnes</p></div></section><section class="spotlight"><div class="image"><a href="club-house.php?code=mercator41"><img src="assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg" alt="" /></a></div><div class="content"><h3 class="major"><a href="club-house.php?code=mercator41">HÔTEL MERCATOR <img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'></a></h3><p class='descriptif_hotel'></p><div id="prix"><h2 id="elements"><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ></h2><p class="infoprix">à partir de: <span> €</span></p><a href="club-house.php?code=mercator41" class="button detail">Plus de détails</a> </div><p class="vue">Evalué par <span>25</span> personnes</p></div></section><section class="spotlight"><div class="image"><a href="club-house.php?code=saintgeorges41"><img src="assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg" alt="" /></a></div><div class="content"><h3 class="major"><a href="club-house.php?code=saintgeorges41">LE SAINT GEORGES <img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'></a></h3><p class='descriptif_hotel'></p><div id="prix"><h2 id="elements"><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ></h2><p class="infoprix">à partir de: <span> €</span></p><a href="club-house.php?code=saintgeorges41" class="button detail">Plus de détails</a> </div><p class="vue">Evalué par <span>25</span> personnes</p></div></section><section class="spotlight"><div class="image"><a href="club-house.php?code=balvendome"><img src="assets/img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg" alt="" /></a></div><div class="content"><h3 class="major"><a href="club-house.php?code=balvendome">BALLADINS DE VENDÔME <img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_1.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'><img src='img/jauge_star_0.png' title='Stars'></a></h3><p class='descriptif_hotel'></p><div id="prix"><h2 id="elements"><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_1.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ><img src='img/jauge_coeur_0.png' title='Note' ></h2><p class="infoprix">à partir de: <span> €</span></p><a href="club-house.php?code=balvendome" class="button detail">Plus de détails</a> </div><p class="vue">Evalué par <span>25</span> personnes</p></div></section>						</section>
+						<!-- fin articles resultats -->
+
+						</div>
+					</td>
+				</tr>
+
+				</article>
+
+		</article>
+{% endblock %}
+{% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
+{% block javascripts %}{% endblock %}

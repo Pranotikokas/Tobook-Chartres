@@ -126,53 +126,6 @@
         </section>
 {% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
 
-    <script type="text/javascript">
-        $("#modal_trigger").leanModal({top : 140, overlay : 0.6, closeButton: ".modal_close" });
-        $(function(){
-            // Calling Login Form
-            $("#login_form").click(function(){
-                $(".social_login").hide();
-                $(".user_login").show();
-                return false;
-            });
-
-            // Calling Register Form
-            $("#register_form").click(function(){
-                $(".social_login").hide();
-                $(".user_register").show();
-                $(".header_title").text('Register');
-                return false;
-            });
-
-            // Going back to Social Forms
-            $(".back_btn").click(function(){
-                $(".user_login").hide();
-                $(".user_register").hide();
-                $(".social_login").show();
-                $(".header_title").text('Login');
-                return false;
-            });
-
-        })
-    </script>
-    <script type="text/javascript">
-        //<!--
-        function change_onglet(name)
-        {
-            document.getElementById('onglet_'+anc_onglet).className = 'onglet_0 onglet';
-            document.getElementById('onglet_'+name).className = 'onglet_1 onglet';
-            document.getElementById('contenu_onglet_'+anc_onglet).style.display = 'none';
-            document.getElementById('contenu_onglet_'+name).style.display = 'block';
-            anc_onglet = name;
-        }
-        //-->
-    </script>
-    <script type="text/javascript">
-        //<!--
-        var anc_onglet = 'quoi';
-        change_onglet(anc_onglet);
-        //-->
-    </script>
 
     <style type="text/css">
         nav {
