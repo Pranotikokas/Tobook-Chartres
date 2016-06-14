@@ -125,9 +125,7 @@
             </div>
         </section>
 {% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
-{% endblock %}
 
-{% block javascripts %}
     <script type="text/javascript">
         $("#modal_trigger").leanModal({top : 140, overlay : 0.6, closeButton: ".modal_close" });
         $(function(){
@@ -175,9 +173,7 @@
         change_onglet(anc_onglet);
         //-->
     </script>
-{% endblock %}
 
-{% block stylesheets %}
     <style type="text/css">
         nav {
             color: #35F8D4;
@@ -263,6 +259,4 @@
             background-color: #2E2E2E ;
             opacity: 0.65 ;
         }
-    </style>
-
 {% endblock %}
