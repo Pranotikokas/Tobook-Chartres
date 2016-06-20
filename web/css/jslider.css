@@ -40,3 +40,28 @@
 .jslider-single .jslider-bg .v,
 .jslider-limitless .jslider-label
 { display: none; }
+
+
+.jslider_blue .jslider-bg i,
+.jslider_blue .jslider-pointer
+{ background-image: url(jslider.blue.png); }
+
+
+.jslider_plastic .jslider-bg i,
+.jslider_plastic .jslider-pointer
+{ background-image: url(jslider.plastic.png); }
+
+
+.jslider_round .jslider-bg i,
+.jslider_round .jslider-pointer
+{ background-image: url(jslider.round.png); }
+
+.jslider_round .jslider-pointer { width: 17px; height: 17px; top: -6px; margin-left: -8px; }
+
+
+
+.jslider_round_plastic .jslider-bg i,
+.jslider_round_plastic .jslider-pointer
+{ background-image: url(jslider.round.plastic.png); }
+
+.jslider_round_plastic .jslider-pointer { width: 18px; height: 18px; top: -7px; margin-left: -8px; }
