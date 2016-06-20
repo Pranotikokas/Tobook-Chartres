@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<article id="main">
+        <header id="fildarian">
+            <span style="font-size: 1.1em;">
+               <a href="" style="padding: 0 2em;" class="colorvert ariane">&#60; Retour</a>
+            </span>
+            <span class="ariane"><!-- Génération d'un fil d'Ariane dynamique -->
+<a href="/">Accueil</a> > <a href="/login.php">Login</a></span>
+        </header> 
+    </article>
+
+
+    <div class="content contact">
+
+        <img style="width:15%;" class="imagecontact" src="{{ asset('img/logo-tobook.png') }}" alt="Logo Tobook" title="Besoin d'une information ?" />
+
+
+
+        <h2 class="major after">Je me connecte</h2>
+        <div class="formulaire_contact">
+        	<form style='text-align:center;' name='Formulaire01' action='{{ path("fos_user_security_check") }}' method='post' >
+
+        		<font >Adresse mail </font>
+        		<input class='btn02' id="username" type='text' name='_username' value="{{ last_username }}" required="required">
+
+        		<font >Password</font>
+        		<input class='btn02' id="password" type='password' name="_password" required="required" >
+        		<br>
+
+        		<input name='fonction1' type='hidden' value='CONNECT'>
+        		<input class='btn01' type='reset' value='Annuler'>
+        		<input class='btn01' type='submit' value="{{ 'security.login.submit'|trans }}">
+        	</form>
+        	{#actuellement non fonctionnel #}
+        	<form style='text-align:center;' name='Formulaire01' action='login.php' method='post' >
+        		<input name='fonction1' type='hidden' value='MDP_LOST'>
+        		<input class='btn02' type='submit' value='Password losted'> 
+        	</form>
+        	<h2 class="major after">Je ne suis pas encore inscrit</h2>
+        		<a href='href="{{ path('fos_user_registration_register') }}"'><button type="button" class="btn btn-default" style='margin-bottom:20px;'>S'inscrire</button></a>
+        </div>
+    </div>
+{% endblock %}

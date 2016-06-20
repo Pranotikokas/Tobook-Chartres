@@ -14,7 +14,7 @@
         <span>Bienvenue {{ app.user.username }}</span>
     {% else %}
         <a href="{{ path('fos_user_registration_register') }}" class="btn btnsansrien"><span>S'INSCRIRE</span></a>
-        <a href=""><span>SE CONNECTER</span></a>
+        <a href="{{ path('fos_user_security_login') }}"><span>SE CONNECTER</span></a>
     {% endif %}           
     <a href="#menu"><span>Menu</span></a>
 </header>
@@ -39,7 +39,7 @@
         </ul>
         <ul class="actions vertical">
             <li><a href="{{ path ('fos_user_registration_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
-            <li><a href="#" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
+            <li><a href="{{ path('fos_user_security_login') }}" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
         </ul>
     {% endif %}
 </nav>

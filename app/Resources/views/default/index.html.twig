@@ -20,7 +20,12 @@
                             <li class="chercheblock">
                                 <div class="select-wrapper">
                                     <select name="categorie" id="category">
-                                        <option value='3' >Chambres d'hotes</option> <option value='2' >Gîtes</option> <option value='1' selected>Hôtels</option> <option value='8' >Musées</option> <option value='5' >Restaurants</option>                                        </select>
+                                        <option value='3' >Chambres d'hotes</option>
+                                        <option value='2' >Gîtes</option>
+                                        <option value='1' selected>Hôtels</option>
+                                        <option value='8' >Musées</option>
+                                        <option value='5' >Restaurants</option>
+                                    </select>
                                 </div>
                             </li>
                             <li class="chercheblock">
@@ -68,7 +73,7 @@
                     <h3 class="major">Je suis un prestataire</h3>
                     <p>Etiam finibus pharetra purus, imperdiet sagittis mauris hendrerit feugiat ante elementum amet arcu. Maecenas vulputate turpis faucibus lorem ipsum dolor sit amet.</p>
                     <ul class="actions">
-                        <li><a href="config.php" class="button">Je m'inscris</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}" class="button">Je m'inscris</a></li>
                     </ul>
                 </div>
             </li>
@@ -87,7 +92,7 @@
         </ul>
     </section>
 
-    <!-- Two || Lise de destinations phares -->
+    <!-- Two || Liste de destinations phares -->
     <section id="two" class="wrapper alt">
         <section class="spotlight">
             <div class="image"><img src="{{ asset('img/suite-romantique-vue-eiffel-paris-sexyhotelsparis-1000x675.jpg') }}" alt="" /></div>
@@ -120,13 +125,14 @@
                 <h3 class="major special">Tobook c'est l'assurance d'une réservation au meilleur prix <br>et d'une relation directe entre hôteliers et particuliers.</h3>
                 <p id="text_inner">Sagittis mauris hendrerit vitae feugiat etiam ante elementum <br />vulputate faucibus convallis bibendum ligula.</p>
                 <ul class="actions">
-                    <li><a href="login.php" class="button special big">Je m'inscris</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}" class="button special big">Je m'inscris</a></li>
                 </ul>
             </div>
         </section>
-{% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
+    </section>
+{% endblock %}
 
-
+{% block extracss %}
     <style type="text/css">
         nav {
             color: #35F8D4;
@@ -212,4 +218,5 @@
             background-color: #2E2E2E ;
             opacity: 0.65 ;
         }
+        </style>
 {% endblock %}

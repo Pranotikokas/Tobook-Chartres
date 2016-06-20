@@ -1,42 +1,66 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <title>{% block title %}Tobook{% endblock %}</title>
-        <link rel="icon" type="image/png" href="{{ asset('img/logo-tobook.png') }}" />
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/auto_style.css') }}" />
-            <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-            <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+
+        <!-- ------ Rétrocompatibilité IE tmtc ------ -->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+        <!-- ------ J'ai regroupé tous les fichiers jsliderBLABLABLABLA.css en un seul ------ -->
         <link rel="stylesheet" href="{{ asset('css/jslider.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('css/jslider.blue.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('css/jslider.plastic.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('css/jslider.round.css') }}" type="text/css">
-        <link rel="stylesheet" href="{{ asset('css/jslider.round.plastic.css') }}" type="text/css">
+
+        <!-- ------ Ceux deux là modifient les mêmes classes, mais je n'ai pas trouvé leur utilité pour l'instant ------ -->
+        <link rel="stylesheet" href="{{ asset('css/auto_style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/auto_style2.css') }}" />
+
+        <!-- ------ Les fichiers utiles (parce qu'il en fallait) ------ -->
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
         {% endblock %}
+
+        {% block extracss %}
+        {% endblock %}
+
+        {% block javascripts %}
+
+        
+        
+        
+
+        <!-- ------ Jquery (oui ça fait beaucoup) ------ -->
+        <script type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.leanModal.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+        <!-- ------ J'ai supprimé les fichiers JS commençant par "auto_blabla" car on ne les avait pas dans le projet ------ -->
+
+        <!-- ------ Les JS utiles ------ -->
+        <script src="{{ asset('js/skel.min.js') }}"></script>
+        <script src="{{ asset('js/util.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+
+        <!-- ------ rétro compatibilité ------ -->
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        {% endblock %}
+
         <meta name="ToBook" content="ToBook">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
+        <title>Tobook - {% block title %}Home{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{{ asset('img/logo-tobook.png') }}" />
         
     </head>
     <body>
-        {% block navbar %}{% endblock %}
+        {% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
         {% block body %}{% endblock %}
         {% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
-        {% block javascripts %}
-            <script type="text/javascript" src="{{ asset('js/auto_jquery.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/auto_script.js') }}"></script>
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
-            <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-            <script type="text/javascript" src="{{ asset('js/jquery-1.11.0.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/jquery.leanModal.min.js') }}"></script>
-            <script src="{{ asset('js/jquery.scrolly.min.js') }}"></script>
-            <script src="{{ asset('js/skel.min.js') }}"></script>
-            <script src="{{ asset('js/util.js') }}"></script>
-            <script src="{{ asset('js/main.js') }}"></script>
-            <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        
+            
+            {# /!\ A L'AIR DE NE SERVIR A RIEN /!\
             <script type="text/javascript">
                 $("#modal_trigger").leanModal({top : 140, overlay : 0.6, closeButton: ".modal_close" });
                 $(function(){
@@ -84,7 +108,8 @@
                 change_onglet(anc_onglet);
                 //-->
             </script>
+            #}
 
-        {% endblock %}
+        
     </body>
 </html>

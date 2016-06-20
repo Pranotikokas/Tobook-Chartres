@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-
-{% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
+    
 
 {% block body %}
 	<article id="main">
@@ -28,7 +27,7 @@
         	{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
         		<font  >Nom </font>
-        		<input class='btn02' type='text' name='nom' value=''>
+        		<input class='btn02' type='text' name='nom' value='' placeholder="actuellement ce champs ne rentre rien en bdd car prénom=username">
 
         		<font  >Prénom</font>
         		{{ form_widget(form.username) }}
@@ -52,39 +51,10 @@
         	{{ form_end(form) }}
         </div>
     </div>
-    {% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
-    {% endblock %}
+{% endblock %}
 
 
 
 
-{% block stylesheets %}
-	 <style type="text/css">
-            /*
-            body {
-            color: purple;
-            background-color: #f5f5f5 ;
 
-            }
-
-            article {
-            color: #000000;
-            background-color: #000000 ;
-            margin-left: auto;
-            margin-right: auto;
-            height : 600px ; 
-            width : 900px 
-            }
-            article a:link,  article a:visited,  article a:active,  article a:hover {
-            color: #000000;
-            width: 100%;
-            }
-
-            .layout { font-family: Georgia, serif; }
-            .layout-slider {margin-top: 15px; margin-bottom: 10px; width: 50%; }
-            .layout-slider-settings { font-size: 12px; }
-            .layout-slider-settings pre { font-family: Courier; }
-            .tagh { text-align: left; vertical-align:middle ; }
-            */
-        </style>
-    {% endblock %}
+	 
