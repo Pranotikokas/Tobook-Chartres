@@ -1,1 +1,479 @@
-Hello World!
+
+{% extends 'base.html.twig' %}
+{% block title %}{# Ici on viendra chercher le nom de l'établissement via un appel twig afin que le titre du site change automatiquement selon la page sur laquelle on est#}Hotel
+{% endblock %}
+{% block extracss %}
+
+        <style type="text/css">
+            #map { 
+                height: 200px; 
+                width : 200px ;
+                margin: 0; 
+                padding: 0; 
+            }
+
+            SELECT.recherche {
+                width: 190px;
+            }
+            INPUT.recherche {
+                width: 190px;
+            }
+            INPUT.rrecherche {
+                width: 192px;
+            }
+
+            .modalWindow {
+                position: fixed;
+                font-family: arial;
+                font-size:80%;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0,0,0,0.2);
+                z-index: 99999;
+                opacity:0;
+                -webkit-transition: opacity 400ms ease-in;
+                -moz-transition: opacity 400ms ease-in;
+                transition: opacity 400ms ease-in;
+                pointer-events: none;
+            }
+            .modalHeader h1 { color: #2D6C31; border-bottom: 2px groove #efefef; }
+            .modalHeader h2 { color: #2D6C31; border-bottom: 2px groove #efefef; }
+            .modalWindow:target {
+                opacity:1;
+                pointer-events: auto;
+            }
+            .modalWindow > div {
+                width: 500px;
+                position: relative;
+                margin: 10% auto;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                background: #fff;
+            }
+            .modalWindow .modalHeader  {    padding: 5px 20px 0px 20px; }
+            .modalWindow .modalContent {    padding: 0px 20px 5px 20px; }
+            .modalWindow .modalFooter  {    padding: 8px 20px 8px 20px; }
+            .modalFooter {
+                background: #F1F1F1;
+                border-top: 1px solid #999;
+                -moz-box-shadow: inset 0px 13px 12px -14px #888;
+                -webkit-box-shadow: inset 0px 13px 12px -14px #888;
+                box-shadow: inset 0px 13px 12px -14px #888;
+            }
+            .modalFooter p {
+                color:#D4482D;
+                text-align:right;
+                margin:0;
+                padding: 5px;
+            }
+            
+
+            .btni {
+                background-color: rgba(144, 144, 144, 0.3);
+                /*background: #2E7D22;
+                background-image: -webkit-linear-gradient(top, #2E7D22, #3DD13D);
+                background-image: -moz-linear-gradient(top, #2E7D22, #3DD13D);
+                background-image: -ms-linear-gradient(top, #2E7D22, #3DD13D);
+                background-image: -o-linear-gradient(top, #2E7D22, #3DD13D);
+                background-image: linear-gradient(to bottom, #2E7D22, #3DD13D);
+                -webkit-border-radius: 10;
+                -moz-border-radius: 10;
+                border-radius: 10px;
+                width : 45px;
+                height : 45px;
+                padding: 2px 2px 2px 2px;*/
+                border-radius: 10%;
+                width : 2.5em;
+                height : 2.5em;
+                padding: 0.1em;
+                text-decoration: none;
+                /*display:block;*/
+                display:inline;
+                /*              width:auto;
+                margin-left:auto;
+                margin-right:auto;
+                */
+                float: right;
+
+            }
+
+            .btni:hover {
+                background-color: #65B32E;
+                /*background: #55C24B;
+                background-image: -webkit-linear-gradient(top, #55C24B, #56AD30);
+                background-image: -moz-linear-gradient(top, #55C24B, #56AD30);
+                background-image: -ms-linear-gradient(top, #55C24B, #56AD30);
+                background-image: -o-linear-gradient(top, #55C24B, #56AD30);
+                background-image: linear-gradient(to bottom, #55C24B, #56AD30);*/
+                text-decoration: none;
+                /*
+                display:block;
+                width:auto;
+                margin-left:auto;
+                margin-right:auto;
+                */
+
+            }
+
+        </style> 
+    {% endblock %}
+    {% block body %}
+    <div style="background-color:red;">
+
+    
+    <!-- Fenetre modal -->
+    <div id="openModalLog" class="modalWindow">
+        <div>
+            <div class="modalHeader">
+                <h1>Connecction</h1>
+                <a href="#close" title="Close" class="close">X</a>
+            </div>
+            <div class="modalContent">
+                <p>Afin de poursuivre sur notre site cous devez vous connecter. </p>
+                <p>Merci </p>
+            </div>
+            <div class="modalFooter">
+                <a href="#cancel" title="Cancel" class="cancel">Annuler</a>
+                <a href="login.php" title="Ok" class="ok">Continnuer</a>
+                <p> </p>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>	
+
+    
+</div>		
+    <!-- Main -->
+    <article id="main">
+        <header id="fildarian">
+            <span style="font-size: 1.1em;">
+               <a href="" style="padding: 0 2em;" class="colorvert ariane">&#60; Retour à la liste</a>
+            </span>
+            <span class="ariane"><!-- Génération d'un fil d'Ariane dynamique -->
+                <a href="/">Accueil</a> > <a href="/club-house.php">Club-house</a>
+            </span>
+        </header> 
+        <div class="wrapper">
+            <div class="inner">
+                <div class="row">
+                    <!-- colonne gauche -->
+                    <div class="6u 12u$(small)">
+                        <!-- Nom de l'hôtel -->
+                        <h3 style="margin-bottom:0.5em;">
+                            HOTEL CAPRICORNE&nbsp;
+                            <img src={{ asset('img/jauge_star_1.png') }} title='Stars'>
+                            <img src={{ asset('img/jauge_star_1.png') }} title='Stars'>
+                            <img src={{ asset('img/jauge_star_0.png') }} title='Stars'>
+                            <img src={{ asset('img/jauge_star_0.png') }} title='Stars'>
+                            <img src={{ asset('img/jauge_star_0.png') }} title='Stars'>
+                        </h3>
+                        <!-- Etoiles & Coeurs -->
+                        <h4>
+                            <span>Note des clients : </span>
+                            <span style='vertical-align:middle; vertical-align: -webkit-baseline-middle;}'>
+                                <img src={{ asset('img/jauge_coeur_1.png') }} title='Note' >
+                                <img src={{ asset('img/jauge_coeur_1.png') }} title='Note' >
+                                <img src={{ asset('img/jauge_coeur_0.png') }} title='Note' >
+                                <img src={{ asset('img/jauge_coeur_0.png') }} title='Note' >
+                                <img src={{ asset('img/jauge_coeur_0.png') }} title='Note' >
+                            </span>                            <!-- suivre cet hotel -->
+                            <span style='vertical-align:super;'>
+                                <a href="#openModalLog"><img class='btni' src={{ asset('img/t_suit.png') }} ></a>
+                            </span>
+
+                        </h4>
+
+                        <!-- Grande Image -->
+                        <span class="image fit">
+                            <a href='#'><img class='centrer' src={{ asset('upload/ch/1/4_400.jpg') }} alt='Extérieur et jardin' ></a>
+                        </span>
+
+                        <div class="box alt">
+                            <!-- Les miniatures en dessous de l'image principale -->
+                            <div class="row 50% uniform">
+                                <tr>
+                                    <td width=132px>
+                                        <a href='#'><img class='centrer' height=120 src={{ asset('upload/ch/1/6_150.jpg') }} alt='Extérieur' ></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width=132px>
+                                        <a href='#'><img class='centrer' height=120 src={{ asset('upload/ch/1/5_150.jpg') }} alt='Carte postal' ></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width=132px>
+                                        <a href='#'><img class='centrer' height=120 src={{ asset('upload/ch/1/7_150.jpg') }} alt='Extérieur au printemps' ></a>
+                                    </td>
+                                </tr> 
+                            </div>
+                            <!-- Bloc d'onglets || Descriptif / Commentaires / Contacts  -->
+                            <!-- Bloc d'onglets en dessous des photos de l'hôtel dans [club-house.php] -->
+                            <div class="systeme_onglets">
+                                <div class="onglets">
+                                    <h4 class="onglet_0 onglet" id="onglet_quoi" onclick="javascript:change_onglet('quoi');">Descriptif</h4>
+                                    <h4 class="onglet_0 onglet" id="onglet_qui" onclick="javascript:change_onglet('qui');">Commentaires</h4>
+                                    <h4 class="onglet_0 onglet" id="onglet_pourquoi" onclick="javascript:change_onglet('pourquoi');">Contacts</h4>
+                                </div>
+                                <div class="contenu_onglets">
+                                    <div class="contenu_onglet" id="contenu_onglet_quoi">
+                                        <!-- Le Google Map -->
+                                        <p class="textalignjustif">
+                                            <span class="image left">  
+                                                <!-- debut carte google -->
+                                                <!-- IWS -->
+                                                <img id="map"/>
+                                                <script>
+                                                function initMap() {
+                                                    var myLatLng = {lat: 47.80150600000000000000, lng: 1.06801000000000000000};
+                                                    var map = new google.maps.Map(document.getElementById('map'), {
+                                                        zoom: 14,
+                                                        center: myLatLng
+                                                    });
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.79517550000000000000, lng: 1.06816550000000000000},
+                                                        title: 'HÔTEL LE VENDÔME', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.78244270000000000000, lng: 1.06448290000000000000}, 
+                                                        title: 'HÔTEL MERCATOR', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.79159860000000000000, lng: 1.06448420000000000000}, 
+                                                        title: 'LE SAINT GEORGES', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.81908800000000000000, lng: 1.07579400000000000000}, 
+                                                        title: 'BALLADINS DE VENDÔME', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.80317180000000000000, lng: 0.95911700000000000000}, 
+                                                        title: 'CAMPINGDELABONNEAVENTURE', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.79184520000000000000, lng: 1.07665490000000000000}, 
+                                                        title: 'AUCŒURDEVENDÔME', 
+                                                        map: map 
+                                                    }); 
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.79105200000000000000, lng: 1.06882800000000000000},
+                                                        title: 'MUSÉE MUNICIPAL',
+                                                        map: map
+                                                    });
+                                                    var marker = new google.maps.Marker({ 
+                                                        position: {lat: 47.81263700000000000000, lng: 1.04346000000000000000}, 
+                                                        title: 'Chez L&eacute;a', 
+                                                        map: map 
+                                                    }); 
+                                                    var imagemv = "{{ asset('./img/marqueur_vert.png') }}" ;
+                                                    var marker = new google.maps.Marker({
+                                                        position: myLatLng,
+                                                        title: 'HOTEL CAPRICORNE',
+                                                        map: map,
+                                                        icon: imagemv
+                                                    });
+                                                }
+                                                    </script>
+        
+            
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+		
+			</span>
+</p>
+<!-- fin carte google -->            <h4>Title</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> 
+        </div>
+        <div class="contenu_onglet" id="contenu_onglet_qui">
+            <!-- Ajout de la liste des commentaires, ainsi que l'ajout d'un commentaire -->  
+            <!-- Envoi d'un commentaire -->
+<form name="messajout" action="mur_ch_mesajt.php" method="post" enctype="multipart/form-data">
+    <p>Expediteur : 
+        <select name="cont_source">
+            <option value="C" selected>
+                            </option>
+                    </select>
+    </p>
+    <p>Sujet : <input type="text" name="sujet" size="60" ></p>
+    <p>Visibilité : 
+        <select name="visu">
+            <option value="PRIVE">Privé</option>
+            <option value="CLUB">Club</option>
+            <option value="PUBL">Public</option> 
+        </select>
+    </p>
+    <p>Message : 
+        <TEXTAREA type="text" name="message" rows="4" cols="55" ></TEXTAREA>
+    </p>
+    <input type="hidden" name="MAX_FILE_SIZE" value="50000000" />
+    Ajouter une image : <input type="file" name="monfichier" />
+    <br/>
+    <INPUT TYPE="hidden" NAME="cont_cible_type" VALUE="CH" />
+    <INPUT TYPE="hidden" NAME="cont_cible_id" VALUE="1" />
+    <a href="#cancel" title="Cancel" class="cancel">Annuler</a>
+    <a href="#" onclick="document.messajout.submit()" title="Ok" class="ok">Envoyer</a>
+    <hr>
+</form>
+
+
+
+            <!-- Afficher la liste des commentaires -->
+<blockquote>
+    <td valign='top' width=80px >
+        <img src={{ asset('img/avatar.png') }} >
+    </td>
+    <td width=515px>
+        <div id='zone-contenu-droite'>Message de <a href='page_2_club.html' target='_blank'><span id='corps_lien'>Laurent CIARKA</span></a> publié le 25/11/2015 à 12:13 &nbsp;<a href="messo_69.html"  onclick="open('messo_69.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_69.html"  onclick="open('messr_69.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b></b>		</br>		Message : <b>Test 12-12</b>		</br>		</br>	</div>	</td></blockquote><blockquote>	<td valign='top' width=80px >		<img src={{ asset('img/avatar.png') }} >	</td>	<td width=515px>	<div id='zone-contenu-droite'>Message de <a href='page_2_club.html' target='_blank'><span id='corps_lien'>Laurent CIARKA</span></a> publié le 25/11/2015 à 11:18 &nbsp;<a href="messo_62.html"  onclick="open('messo_62.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_62.html"  onclick="open('messr_62.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b></b>		</br>		Message : <b></b>		</br>		</br>		<a href="messo_62.html"  onclick="open('messo_62.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" >		<img src={{ asset ('upload/mur/62/62_150.png') }} ></a>	</div>	</td></blockquote><blockquote>	<td valign='top' width=80px >		<img src={{ asset('img/avatar.png') }} >	</td>	<td width=515px>	<div id='zone-contenu-droite'>Message de <a href='page_2_club.html' target='_blank'><span id='corps_lien'>Laurent CIARKA</span></a> publié le 25/11/2015 à 11:18 &nbsp;<a href="messo_61.html"  onclick="open('messo_61.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_61.html"  onclick="open('messr_61.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b></b>		</br>		Message : <b></b>		</br>		</br>	</div>	</td></blockquote><blockquote>	<td valign='top' width=80px >		<img src={{ asset('img/avatar.png') }} >	</td>	<td width=515px>	<div id='zone-contenu-droite'>Message de <a href='page_2_club.html' target='_blank'><span id='corps_lien'>Laurent CIARKA</span></a> publié le 25/11/2015 à 11:17 &nbsp;<a href="messo_60.html"  onclick="open('messo_60.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_60.html"  onclick="open('messr_60.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b></b>		</br>		Message : <b></b>		</br>		</br>	</div>	</td></blockquote><blockquote>	<td valign='top' width=80px >		<img src={{ asset('img/avatar.png') }} >	</td>	<td width=515px>	<div id='zone-contenu-droite'>Message de <a href='page_2_club.html' target='_blank'><span id='corps_lien'>Laurent CIARKA</span></a> publié le 25/11/2015 à 11:10 &nbsp;<a href="messo_59.html"  onclick="open('messo_59.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_59.html"  onclick="open('messr_59.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b>Test</b>		</br>		Message : <b>Test image 4</b>		</br>		</br>		<a href="messo_59.html"  onclick="open('messo_59.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" >		<img src={{ asset ('upload/mur/59/59_150.jpg') }} ></a>	</div>	</td></blockquote><tr>	<td colspan=2 >	<blockquote> 	<td valign='top' width=80px >		&nbsp;	</td>	<td valign='top' width=80px >		<img src={{ asset('img/avatar.png') }} >	</td>	<td width=435px>	<div id='zone-contenu-droite'>Réponse de <a href='page_capricorne_club-house.html' target='_blank'><span id='corps_lien'>HOTEL CAPRICORNE</span></a> publié le 25/11/2015 à 12:03 &nbsp;<a href="messo_68.html"  onclick="open('messo_68.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messo.png') }} align="middle"></a>  &nbsp;<a href="messr_68.html"  onclick="open('messr_68.html', 'Popup', 'scrollbars=1,resizable=1,height=700,width=640'); return false;" > <img src={{ asset ('img/messr.png') }} align="middle"></a> 		</br>		Sujet : <b></b>		</br>		Message : <b>Réponse 6</b>		</br>		</br>	</div>	</td></tr></blockquote>            <!-- Fin d'ajout de la liste des commentaires + Ajout un commentaire -->
+        </div>
+        <div class="contenu_onglet" id="contenu_onglet_pourquoi">
+            <!-- Ajout du numéro de téléphone -->
+            <p>Voici les coordonnées téléphoniques : </p>
+            <p>Tél. : <a id="coordonnes_telephoniques" href='tel:02 54 80 27 00'> <span id='corps_lien'>02 54 80 27 00</span></a></p>
+            <!-- Fin d'ajout du numéro de téléphone --> 
+        </div>
+    </div>
+</div>
+    
+
+
+ 
+                            <!-- ------------------------------------------------------- -->
+                        </div>
+                    </div>
+
+                    <!-- Colonne droite -->
+                    <div class="6u$ 12u$(small)">
+                        <!-- Comparateur de prix fictif -->
+                        <div class="box comparateur">
+                            <h3 class="compare">Comparateur de prix</h3>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="compar">
+                                <tbody>
+                                    <div>
+                                        <td class="not"><a href=http://hotel.reservit.com/front2266/front.do?m=booking&custid=2&langcode=FR&hotelid=2266&hotelid=2266&specialMode=default target="_blank">Prix direct Hôtelier</a></td><td class="not-color"><a href=http://hotel.reservit.com/front2266/front.do?m=booking&custid=2&langcode=FR&hotelid=2266&hotelid=2266&specialMode=default target="_blank">à partir de</a></td><td  class="not"><a href=http://hotel.reservit.com/front2266/front.do?m=booking&custid=2&langcode=FR&hotelid=2266&hotelid=2266&specialMode=default target="_blank">62.00</a></td><td class="not"><a href=http://hotel.reservit.com/front2266/front.do?m=booking&custid=2&langcode=FR&hotelid=2266&hotelid=2266&specialMode=default target="_blank">€</a></td>                                    </div>
+                                    <tr style="height: 0.5em;"></tr>
+                                    <tr>
+                                        <td class="not">Hotels.com</td>
+                                        <td class="not-color">à partir de</td>
+                                        <td class="not">520.00</td>
+                                        <td class="not">€</td>
+                                    </tr>
+                                    <tr style="height: 0.5em;">
+                                    </tr>
+                                    <tr>
+                                        <td class="not">Booking.com</td>
+                                        <td class="not-color">à partir de</td>
+                                        <td class="not">540.00</td>
+                                        <td class="not">€</td>
+                                    </tr>
+                                    <tr style="height: 0.5em;">
+                                    </tr>
+                                    <tr>
+                                        <td class="not">Expedia.fr</td>
+                                        <td class="not-color">à partir de</td>
+                                        <td class="not">590.00</td>
+                                        <td class="not">€</td>
+                                    </tr>
+                                    <tr style="height: 0.5em;">
+                                    </tr>
+                                    <tr>
+                                        <td class="not">Kayak.fr</td>
+                                        <td>à parir de</td>
+                                        <td class="not">1620.00</td>
+                                        <td class="not">€</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- FIN Comparateur de prix -->
+
+                        <!-- Liste des pictos' -->
+                        <div class="table-wrapper liste_icones">
+                            <table class="liste_icones icons">
+                                <tr>
+                                    <td class="test1"><img src={{ asset('img/chien.png') }} alt="Chiens interdits" title "Les chiens sont interdits dans cet établissement !" /><span class="picto1">Animaux interdits</span></td>
+                                    <td><img src={{ asset('img/ascenseur.png') }} alt="Ascenseur présent" title="Il y a un ascenseur dans cet établissement !" /><span class="picto1">Ascenseur</span></td>
+                                    <td><img src={{ asset('img/parking.png') }} alt="Parking de proximité" title="Un parking de proximité est disponible !" /><span class="picto1">Parking surveillé</span></td>
+                                    <td><img src={{ asset('img/toque_chef.png') }} alt="Restaurant Gastronomique" title="Présence d'un restaurant gastronomique dans cet établissement !" /><span class="picto1">Restaurant gastronomique</span></td>
+                                    <td><img src={{ asset('img/coffre_fort.png') }} alt="Coffre-Fort" title="Présence d'un coffre-fort pour stocker vos effets personnels !" /><span class="picto1">Coffre-fort personnel</span></td>
+                                </tr>
+                                <tr>
+                                    <td><img src={{ asset('img/train.png') }} alt="Gare de proximité" title="Présence d'une gare à proximité !" /><span class="picto1">Gare à proximité</span></td>
+                                    <td><img src={{ asset('img/avion.png') }} alt="Aéroport à proximité" title="Il y a un aéroport à proximité !" /><span class="picto1">Aéroport à proximité</span></td>
+                                    <td><img src={{ asset('img/piscine.png') }} alt="Piscine couverte" title="Présence d'une piscine couverte dans cet établissement !" /><span class="picto1">Piscine couverte</span></td>
+                                    <td><img src={{ asset('img/wifi.png') }} alt="Wifi & ADSL" title="On peut se connecter à Internet dans cet établissement !" /><span class="picto1">&nbsp; &nbsp; Wifi haut débit</span></td>
+                                    <td><img src={{ asset('img/acces_handicap.png') }} alt="Accès au handicapés" title="Les handicapé peuvent circuler dans cet établissement !" /><span class="picto1">Accès handicapé</span></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="box comparateur">
+                            <h3 class="compare">Actualités / Fil Info :</h3>
+                        </div>
+
+                        <!-- Fil de discussion -->
+                        <div class="box discussion" style="max-height: 300px; overflow: hidden;">
+                            <!-- Blockquote -->
+                                                    </div>
+                    </div>
+                </div>
+                <!-- Fin des colonnes -->
+            </div>
+        </div>
+    </article>
+        <script type="text/javascript">
+            $("#modal_trigger").leanModal({top : 140, overlay : 0.6, closeButton: ".modal_close" });
+            $(function(){
+                // Calling Login Form
+                $("#login_form").click(function(){
+                    $(".social_login").hide();
+                    $(".user_login").show();
+                    return false;
+                });
+
+                // Calling Register Form
+                $("#register_form").click(function(){
+                    $(".social_login").hide();
+                    $(".user_register").show();
+                    $(".header_title").text('Register');
+                    return false;
+                });
+
+                // Going back to Social Forms
+                $(".back_btn").click(function(){
+                    $(".user_login").hide();
+                    $(".user_register").hide();
+                    $(".social_login").show();
+                    $(".header_title").text('Login');
+                    return false;
+                });
+
+            })
+        </script>
+        <script type="text/javascript">
+            //<!--
+            function change_onglet(name)
+            {
+                document.getElementById('onglet_'+anc_onglet).className = 'onglet_0 onglet';
+                document.getElementById('onglet_'+name).className = 'onglet_1 onglet';
+                document.getElementById('contenu_onglet_'+anc_onglet).style.display = 'none';
+                document.getElementById('contenu_onglet_'+name).style.display = 'block';
+                anc_onglet = name;
+            }
+            //-->
+        </script>
+        <script type="text/javascript">
+            //<!--
+            var anc_onglet = 'quoi';
+            change_onglet(anc_onglet);
+            //-->
+        </script>
+    {% endblock %}
