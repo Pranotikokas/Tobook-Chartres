@@ -2,6 +2,14 @@
     <h1><a href="{{ path('home') }}">Tobook<span>.club</span></a></h1>
     <span style="margin-left: 20%; float:left; font-size:10px; font-weight:bold; padding-top: 5px;">
         <span class="langdevise">Langue &nbsp;</span>
+        <form method="POST" action="{{ path('changeLocale') }}">
+            <select name="langue" size="1">
+                <option>fr
+                <option>en
+                <option>de
+            </select>
+            <button type="submit">Langue</button>
+        </form>
         <span id="langue">FR</span>
         <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
         <span class="langdevise">Devise &nbsp;</span>
@@ -13,8 +21,8 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <span>Bienvenue {{ app.user.username }}</span>
     {% else %}
-        <a href="{{ path('fos_user_registration_register') }}" class="btn btnsansrien"><span>S'INSCRIRE</span></a>
-        <a href="{{ path('fos_user_security_login') }}"><span>SE CONNECTER</span></a>
+        <a href="{{ path('fos_user_registration_register') }}" class="btn btnsansrien"><span>{{ 'S\'INSCRIRE'|trans }}</span></a>
+        <a href="{{ path('fos_user_security_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
     {% endif %}           
     <a href="#menu"><span>Menu</span></a>
 </header>

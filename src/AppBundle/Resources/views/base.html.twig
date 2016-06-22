@@ -40,8 +40,8 @@
         {% endblock %}
     </head>    
     <body>
-        {% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
+        {% block navbar %}{% include ('AppBundle:navbar:navbar.html.twig') %}{% endblock %}
         {% block body %}{% endblock %}
-        {% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}
+        {% block footer %}{% include ('AppBundle:footer:footer.html.twig') %}{% endblock %}
     </body>
 </html>

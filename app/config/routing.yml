@@ -11,13 +11,20 @@ comment:
     prefix:   comment/
 
 home:
-    path:     /
+    path:     /{_locale}/
     defaults: { _controller: AppBundle:Default:index}
 
 recherche:
-    path:     /recherche
+    path:     /{_locale}/recherche
     defaults: { _controller: AppBundle:Default:recherche}
 
+changeLocale:
+    path:     /{_locale}/change
+    defaults: { _controller: AppBundle:Default:changeLocale}
+
+property_homepage:
+    path:     /{_locale}/property
+    defaults: { _controller: AppBundle:Property:index }
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"

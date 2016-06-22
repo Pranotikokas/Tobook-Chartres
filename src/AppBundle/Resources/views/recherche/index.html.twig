@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppBundle::base.html.twig' %}
 {% block title %}Recherche{% endblock %}
 {% block extracss %}
 	{# sert (entre autre ?) à afficher la map #}
@@ -104,8 +104,6 @@
 		}
 	</style>
 {% endblock %}
-
-{% block navbar %}{% include ('navbar/navbar.html.twig') %}{% endblock %}
 
 {% block body %}
 	<!-- Main -->
@@ -413,4 +411,3 @@
 
 		</article>
 {% endblock %}
-{% block footer %}{% include ('footer/footer.html.twig') %}{% endblock %}

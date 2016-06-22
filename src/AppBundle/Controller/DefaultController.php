@@ -14,11 +14,10 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
+        return $this->render('AppBundle:default:index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
     }
-
 
     /**
      * @Route("/recherche", name="recherche")
@@ -26,8 +25,25 @@ class DefaultController extends Controller
     public function rechercheAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('recherche/index.html.twig', array(
+        return $this->render('AppBundle:recherche:index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ));
-    }    
+    }  
+
+    public function changeLocaleAction(Request $request)
+    {
+        $request = $this->getRequest();
+        echo $request->getLocale();
+
+        $lg = $request->get('langue');
+        echo $lg;
+
+       $request = $this->getRequest();
+       $request->setLocale($lg);
+
+        $request = $this->getRequest();
+        echo $request->getLocale();
+
+        return $this->redirect($this->generateUrl('home', array('_locale' => $lg)));
+    }  
 }
